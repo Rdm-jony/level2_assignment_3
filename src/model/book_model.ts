@@ -1,17 +1,22 @@
 import { model, Schema } from "mongoose";
 import { IBook } from "../interface/book_interface";
+import { Borrow } from "./borrow_model";
 
-const bookShema=new Schema<IBook>({
-    title:{type:String,required:[true,"Book title is required"],trim:true},
-    author:{type:String,required:[true,"author is required"],trim:true},
-    genre:{type:String,enum:["FICTION","NON_FICTION","SCIENCE","HISTORY","BIOGRAPHY","FANTASY"],required:true,default:"FICTION"},
-    isbn:{type:String,unique:[true,"isbn must be unique"],required:[true,"isbn is required"]},
-    description:{type:String},
-    copies:{type:Number,required:[true,"Book copies is required"],min:[0,"copies must be a non negative number"]},
-    available:{type:Boolean,default:true}
-},{
-    versionKey:false,
-    timestamps:true
+const bookShema = new Schema<IBook>({
+    title: { type: String, required: [true, "Book title is required"], trim: true },
+    author: { type: String, required: [true, "author is required"], trim: true },
+    genre: { type: String, enum: ["FICTION", "NON_FICTION", "SCIENCE", "HISTORY", "BIOGRAPHY", "FANTASY"], required: true, default: "FICTION" },
+    isbn: { type: String, unique: [true, "isbn must be unique"], required: [true, "isbn is required"] },
+    description: { type: String },
+    copies: { type: Number, required: [true, "Book copies is required"], min: [0, "copies must be a non negative number"] },
+    available: { type: Boolean, default: true }
+}, {
+    versionKey: false,
+    timestamps: true
 })
 
-export const Book=model("Book",bookShema)
+bookShema.pre("deleteOne", async function (next) {
+    await Borrow.deleteMany({ book: this.getFilter()._id })
+})
+
+export const Book = model("Book", bookShema)

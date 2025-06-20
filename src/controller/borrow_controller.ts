@@ -37,12 +37,17 @@ borrowRoutes.post("/", async (req: Request, res: Response): Promise<any> => {
 
     } catch (error: any) {
         console.log(error)
-        res.status(500).json({
-            success: false, message: error.name, error: {
-                name: error.name,
-                errors: error.errors
+        const isDuplicateKey = error.code === 11000 || error?.cause?.code === 11000;;
+        res.status(isDuplicateKey ? 409 : 500).json({
+            success: false,
+            message: error.name || "InternalServerError",
+            error: {
+                name: error.name || "Error",
+                errors: isDuplicateKey ? error.errorResponse ?? error.cause.errorResponse :
+                    error.errors || "Something went wrong"
+
             }
-        })
+        });
     }
 })
 
@@ -82,7 +87,7 @@ borrowRoutes.get("/", async (req: Request, res: Response) => {
 
         ])
 
-        res.json({success:true,message:"Borrowed books summary retrieved successfully",data})
+        res.json({ success: true, message: "Borrowed books summary retrieved successfully", data })
     } catch (error: any) {
         console.log(error)
         res.status(500).json({

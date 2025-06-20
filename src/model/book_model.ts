@@ -16,7 +16,10 @@ const bookShema = new Schema<IBook>({
 })
 
 bookShema.pre("deleteOne", async function (next) {
-    await Borrow.deleteMany({ book: this.getFilter()._id })
+    await Borrow.deleteMany({
+        book: this.getFilter()._id
+    })
+    next()
 })
 
 export const Book = model("Book", bookShema)

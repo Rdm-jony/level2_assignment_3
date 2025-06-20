@@ -33,7 +33,57 @@ src/
 │   ├── book_interface.ts
 │   └── borrow_interface.ts
 ```
+## 🗂️ Models
 
+This project uses **Mongoose** to define two main data models: **Book** and **Borrow**. They represent the core of the library management system.
+
+---
+
+### 📚 Book Model (`book_model.ts`)
+
+The **Book** model stores details about each book in the library, including:
+
+- `title`: The book’s title (required).
+- `author`: The author’s name (required).
+- `genre`: Book genre, restricted to specific categories (e.g., FICTION, SCIENCE).
+- `isbn`: Unique ISBN number (required and unique).
+- `description`: Optional description text.
+- `copies`: Number of copies available (must be zero or more).
+- `available`: Boolean to mark if the book is currently available (default: true).
+
+**Special Behavior:**  
+When a **book is deleted**, a Mongoose pre-delete hook automatically deletes all borrow records referencing that book to maintain data integrity.
+
+---
+
+### 🔖 Borrow Model (`borrow_model.ts`)
+
+The **Borrow** model tracks the borrowing records of books:
+
+- `book`: Reference to a Book document (required).
+- `quantity`: Number of copies borrowed (minimum 1, required).
+- `dueDate`: Date by which the book should be returned (required).
+
+**Instance Methods:**
+
+- `updateAvailableBook(bookId)`: Marks the referenced book as unavailable (sets `available` to false).
+
+---
+
+### Relationships
+
+- **Borrow documents** reference **Book documents** by their ObjectId.
+- Deleting a **Book** triggers removal of all associated **Borrow** records to maintain data integrity.
+
+---
+
+
+## 🚀 Setup Instructions
+### 📂 GitHub Repository:
+🔗 https://github.com/Rdm-jony/level2_assignment_3
+
+### 🌐 Live Demo:
+🔗 https://librarymanagementexpress.vercel.app/
 
 _ _ _
 ## 📘 API Endpoints
@@ -79,13 +129,5 @@ _ _ _
 
 _ _ _
 
-## ⚙️ Setup Instructions
-
-### ✅ Clone the repository
-```
-git clone https://github.com/Rdm-jony/level2_assignment_3.git
-cd level2_assignment_3
-
-```
 
 

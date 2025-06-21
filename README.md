@@ -95,7 +95,7 @@ _ _ _
 | GET    | `/books`         | Get all books (with optional filters) |
 | GET    | `/books/:bookId` | Get a specific book                   |
 | POST   | `/books`         | Create a new book                     |
-| PATCH  | `/books/:bookId` | Update a book                         |
+| PUT    | `/books/:bookId` | Update a book                         |
 | DELETE | `/books/:bookId` | Delete a book                         |
 
 ### ✅ Optional Query Parameters (GET /books)

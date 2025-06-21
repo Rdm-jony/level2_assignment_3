@@ -6,11 +6,25 @@ A simple Express + MongoDB backend for managing library books and borrow records
 
 ## 📦 Tech Stack
 
-- **Backend:** Node.js, Express
-- **Database:** MongoDB (Mongoose ODM)
-- **Language:** TypeScript
+- Node.js
+- Express.js
+- MongoDB + Mongoose
+- TypeScript
+- Vercel (deployment)
 
 ---
+_ _ _
+## 🧠 Features
+
+🔸 Custom validation using Mongoose schema rules
+
+🔸 Automatically mark a book as unavailable if copies reach zero
+
+🔸 Aggregation pipeline to get borrowed book stats (title, ISBN, total quantity)
+
+🔸 Middleware to clean up borrows when a book is deleted (findOneAndDelete)
+
+_ _ _
 
 ## 📁 Folder Structure
 
@@ -117,17 +131,6 @@ limit — number of results (default: 4)
 
 _ _ _
 
-## 🧠 Features
-
-🔸 Custom validation using Mongoose schema rules
-
-🔸 Automatically mark a book as unavailable if copies reach zero
-
-🔸 Aggregation pipeline to get borrowed book stats (title, ISBN, total quantity)
-
-🔸 Middleware to clean up borrows when a book is deleted (findOneAndDelete)
-
-_ _ _
 
 
 

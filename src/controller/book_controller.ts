@@ -32,7 +32,7 @@ bookRoutes.get("/", async (req: Request, res: Response): Promise<any> => {
         const sort = req.query.sort as string
         const limit = req.query.limit as string
         const sortField = sort == "asc" ? 1 : -1
-        const data = await Book.find(filter ? { genre: filter } : {}).sort({ [sortBy]: sortField }).limit(Number(limit ?? 4))
+        const data = await Book.find(filter ? { genre: filter } : {}).sort({ [sortBy]: sortField }).limit(Number(limit ?? 10))
         res.status(200).json({ success: true, message: "Books retrieved successfully", data })
     } catch (error: any) {
         console.log(error)

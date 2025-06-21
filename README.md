@@ -92,8 +92,26 @@ The **Borrow** model tracks the borrowing records of books:
 
 
 ## 🚀 Setup Instructions
-### 📂 GitHub Repository:
-🔗 https://github.com/Rdm-jony/level2_assignment_3
+## 🛠️ Local Setup (Quick Start)
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Rdm-jony/level2_assignment_3.git
+   cd level2_assignment_3
+   
+2. **Install dependencies**
+   ```bash
+   npm install
+
+3. **Add your MongoDB credentials in the .env file:**
+    ```bash
+    DB_USER=your_username
+    DB_PASS=your_password
+    
+4. **Start the development server**
+    ```bash
+    npm run dev
+
 
 ### 🌐 Live Demo:
 🔗 https://librarymanagementexpress.vercel.app/

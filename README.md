@@ -13,7 +13,6 @@ A simple Express + MongoDB backend for managing library books and borrow records
 - Vercel (deployment)
 
 ---
-_ _ _
 ## 🧠 Features
 
 🔸 Custom validation using Mongoose schema rules
